@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan Andi & Elin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lock-scroll">
+
+<!-- COVER -->
+<div id="cover">
+  <p>The Wedding Of</p>
+  <h1>Andi & Elin</h1>
+  <p>Kepada Yth.</p>
+  <p class="guest-name" id="guestName">Bapak/Ibu/Saudara/i</p>
+  <button class="open-btn" onclick="openInvitation()">Buka Undangan</button>
+</div>
+
+<!-- KONTEN -->
+<div id="content" style="display:none">
+  <section class="hero">
+    <div>
+      <p class="sub-title reveal">THE WEDDING OF</p>
+      <h1 class="reveal delay-1">Andi & Elin</h1>
+      <p class="date reveal delay-2">26 July 2026</p> 
+      
+      <div class="container">
+        <h2 class="reveal delay-3">Menuju Hari Bahagia</h2>
+        
+        <div class="countdown">
+          <div class="time-box reveal delay-4">
+            <div class="time-value" id="days">00</div>
+            <div class="time-label">Hari</div>
+          </div>
+          <div class="time-box reveal delay-4">
+            <div class="time-value" id="hours">00</div>
+            <div class="time-label">Jam</div>
+          </div>
+          <div class="time-box reveal delay-4">
+            <div class="time-value" id="minutes">00</div>
+            <div class="time-label">Menit</div>
+          </div>
+          <div class="time-box reveal delay-4">
+            <div class="time-value" id="seconds">00</div>
+            <div class="time-label">Detik</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="greeting">
+  <div class="container">
+    <h2 class="reveal">Assalamu'alaikum Wr. Wb.</h2>
+    <p class="reveal delay-1">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.</p>
+  </div>
+</section>
+
+ <section class="couple-section">
+  <div class="container">
+    <h2 class="reveal">Mempelai</h2>
+    
+    <div class="couple">
+      <div class="person reveal delay-1">
+        <img src="andi.jpg" alt="Andi">
+        <h3>Andi Pratama</h3>
+        <p>Putra dari Bpk. Budi & Ibu Sari</p>
+      </div>
+      
+      <div class="person reveal delay-2">
+        <img src="elin.jpg" alt="Elin">
+        <h3>Elin Maharani</h3>
+        <p>Putri dari Bpk. Hendra & Ibu Lina</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="event" id="acara">
+  <div class="container">
+    <h2 class="reveal">Detail Acara</h2>
+    <div class="event-card reveal delay-1">
+      <h3>Akad & Resepsi</h3>
+      <p>Minggu, 26 July 2026<br>08:00 - 14:00 WIB</p>
+      <p>Gedung Serbaguna Mawar, Jakarta Selatan</p>
+      <a href="#" class="btn">Buka Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="container">
+    <h2 class="reveal">Galeri Kami</h2>
+    <div class="gallery">
+      <img src="elin.jpg" alt="Foto 1" class="reveal">
+      <img src="elin.jpg" alt="Foto 2" class="reveal delay-1">
+      <img src="elin.jpg" alt="Foto 3" class="reveal delay-2">
+      <img src="elin.jpg" alt="Foto 4" class="reveal delay-3">
+    </div>
+  </div>
+</section>
+ 
+<section class="gift">
+  <div class="container">
+    <h2 class="reveal">Wedding Gift</h2>
+    <p class="reveal delay-1">Doa restu Anda merupakan hadiah terbesar bagi kami...</p>
+    
+    <div class="gift-box reveal delay-2">
+      <h3>BCA</h3>
+      <p>1234567890</p>
+      <p>a.n. Andi Pratama</p>
+      <button class="copy-btn" onclick="copyText('1234567890')">Salin No. Rekening</button>
+    </div>
+    
+    <div class="gift-box reveal delay-3">
+      <h3>QRIS</h3>
+      <img src="elin.jpg" alt="QRIS" style="width:180px;margin-top:10px">
+    </div>
+  </div>
+</section>
+
+<section class="rsvp">
+  <div class="container">
+    <h2 class="reveal">Ucapan & Doa</h2>
+    <form id="rsvpForm" class="reveal delay-1">
+      <input type="text" id="nama" placeholder="Nama Anda" required>
+      <select id="hadir" required>
+        <option value="">Kehadiran</option>
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+      </select>
+      <textarea id="ucapan" rows="4" placeholder="Tulis ucapan & doa"></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div id="ucapanList" style="margin-top:40px; max-width:600px; margin:auto">
+      <p id="loading">Memuat ucapan...</p>
+    </div>
+  </div>
+</section>
+
+  <footer>
+    <p>Terima kasih atas doa dan restunya</p>
+    <p><strong>Andi & Elin</strong></p>
+    <p>26 July 2026</p>
+  </footer>
+</div>
+
+<!-- Musik -->
+<audio id="bgm" loop>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik -->
+<button id="musicBtn" class="music-btn">🎵</button>
+
+<script>
+  // Cek kalau ada redirect dari 404.html
+  (function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, new URL(redirect).pathname + new URL(redirect).search);
+    }
+  })();
+</script>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
